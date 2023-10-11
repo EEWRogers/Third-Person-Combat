@@ -29,7 +29,14 @@ public class PlayerController : MonoBehaviour
     private InputAction attackAction;
     private InputAction blockAction;
 
-    private void Start()
+    private Transform cameraTransformReference;
+
+    void Awake() 
+    {
+        cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
+    }
+
+    void Start()
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
@@ -63,11 +70,13 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
+        cameraTransformReference.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
+
         Vector2 input = moveAction.ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
 
         // ties the movement direction to the camera direction
-        move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
+        move = move.x * cameraTransform.right.normalized + move.z * cameraTransformReference.forward.normalized;
         move.y = 0f;
 
         controller.Move(move * Time.deltaTime * playerSpeed);
