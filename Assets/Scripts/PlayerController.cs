@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private bool groundedPlayer;
     private PlayerInput playerInput;
     private InputAction moveAction;
-    private InputAction lookAction;
     private InputAction jumpAction;
     private InputAction attackAction;
     private InputAction blockAction;
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         moveAction = playerInput.actions["Move"];
-        lookAction = playerInput.actions["Look"];
         jumpAction = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
         blockAction = playerInput.actions["Block"];
