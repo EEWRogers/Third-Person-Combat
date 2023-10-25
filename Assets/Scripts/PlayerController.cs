@@ -29,12 +29,15 @@ public class PlayerController : MonoBehaviour
     private InputAction attackAction;
     private InputAction blockAction;
 
+    private Weapon currentWeapon;
     private Transform cameraTransformReference;
     
 
     void Awake() 
     {
         cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
+        currentWeapon = FindObjectOfType<Weapon>();
+        currentWeapon.GetComponent<BoxCollider>().enabled = false;
     }
 
     void Start()
@@ -59,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
         RotateTowardsCamera();
 
-        AttackPlayer();
+        Attack();
     }
 
     void CheckIfGrounded()
@@ -104,7 +107,7 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    void AttackPlayer()
+    void Attack()
     {
         if (attackAction.triggered)
         {
@@ -112,4 +115,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void EnableWeapon()
+    {
+        currentWeapon.GetComponent<BoxCollider>().enabled = true;
+    }
+
+        void DisableWeapon()
+    {
+        currentWeapon.GetComponent<BoxCollider>().enabled = false;
+    }
 }

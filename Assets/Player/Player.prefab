@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 1501984553794145901}
   - component: {fileID: 5028136741682309384}
   - component: {fileID: 2804535692741681548}
+  - component: {fileID: 5543190740874070371}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -500,3 +501,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5543190740874070371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8861891069118016443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7b6789afb85d647b802508f93352bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
