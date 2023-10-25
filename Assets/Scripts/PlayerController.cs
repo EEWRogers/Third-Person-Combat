@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
         JumpPlayer();
 
         RotateTowardsCamera();
+
+        AttackPlayer();
     }
 
     void CheckIfGrounded()
@@ -101,4 +103,13 @@ public class PlayerController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
+
+    void AttackPlayer()
+    {
+        if (attackAction.triggered)
+        {
+            GetComponent<Animator>().SetTrigger("attack");
+        }
+    }
+
 }
