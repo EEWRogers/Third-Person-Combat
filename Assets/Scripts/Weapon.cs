@@ -14,6 +14,7 @@ private void OnTriggerEnter(Collider other)
     if (targetHealth != null)
     {
         targetHealth.TakeDamage(weaponDamage);
+        targetHealth.KnockBack(weaponDamage, gameObject.transform.position);
     }
 }
 }
