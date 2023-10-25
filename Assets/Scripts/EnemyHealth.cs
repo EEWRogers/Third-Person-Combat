@@ -33,7 +33,8 @@ public class EnemyHealth : MonoBehaviour
         knockbackDirection.z = 0;
         knockbackDirection = knockbackDirection.normalized;
 
-        gameObject.transform.position += knockbackDirection * Time.deltaTime * (damageAmount * knockBackMultiplier);
+        Rigidbody Enemy = GetComponent<Rigidbody>();
+        Enemy.AddForce(knockbackDirection * (damageAmount*knockBackMultiplier));
     }
 
     void Die()

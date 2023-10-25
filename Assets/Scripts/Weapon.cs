@@ -6,15 +6,22 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private float weaponDamage = 1f;
     private EnemyHealth targetHealth;
+    private Transform player;
 
-private void OnTriggerEnter(Collider other)
-{
+    void Awake()
+    {
+        player = gameObject.GetComponentInParent<Transform>();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
     targetHealth = other.gameObject.GetComponent<EnemyHealth>();
 
-    if (targetHealth != null)
-    {
+        if (targetHealth != null)
+        {
         targetHealth.TakeDamage(weaponDamage);
-        targetHealth.KnockBack(weaponDamage, gameObject.transform.position);
+        targetHealth.KnockBack(weaponDamage, player.position);
+        }
     }
-}
+
 }
