@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private InputAction blockAction;
 
     private Transform cameraTransformReference;
+    
 
     void Awake() 
     {
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        cameraTransformReference.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0);
+        cameraTransformReference.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0); //allows us to access the camera's direction without accounting for rotation
 
         Vector2 input = moveAction.ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
