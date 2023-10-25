@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMover : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
     NavMeshAgent navMeshAgent;
+    Animator animator;
 
     void Start() 
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     void Update() 

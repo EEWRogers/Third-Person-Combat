@@ -14,23 +14,23 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 2.0f;
-    [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private float jumpHeight = 1.0f;
-    [SerializeField] private float gravityValue = -9.81f;
+    [SerializeField] float playerSpeed = 2.0f;
+    [SerializeField] float rotationSpeed = 5f;
+    [SerializeField] float jumpHeight = 1.0f;
+    [SerializeField] float gravityValue = -9.81f;
     
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-    private Transform cameraTransform;
-    private PlayerInput playerInput;
-    private InputAction moveAction;
-    private InputAction jumpAction;
-    private InputAction attackAction;
-    private InputAction blockAction;
+    CharacterController controller;
+    Vector3 playerVelocity;
+    bool groundedPlayer;
+    Transform cameraTransform;
+    PlayerInput playerInput;
+    InputAction moveAction;
+    InputAction jumpAction;
+    InputAction attackAction;
+    InputAction blockAction;
 
-    private Weapon currentWeapon;
-    private Transform cameraTransformReference;
+    Weapon currentWeapon;
+    Transform cameraTransformReference;
     
 
     void Awake() 
