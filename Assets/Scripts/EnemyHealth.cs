@@ -6,14 +6,11 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 10f;
-    [SerializeField] private float knockBackMultiplier = 100f;
     private float currentHealth;
-    private Vector3 knockbackDirection;
 
     void Awake()
     {
         currentHealth = maxHealth;
-        knockbackDirection = new Vector3();
     }
 
     public void TakeDamage(float damageAmount)
@@ -25,16 +22,6 @@ public class EnemyHealth : MonoBehaviour
         {
             Die();
         }
-    }
-
-    public void KnockBack(float damageAmount, Vector3 playerPosition)
-    {
-        knockbackDirection = gameObject.transform.position - playerPosition;
-        knockbackDirection.z = 0;
-        knockbackDirection = knockbackDirection.normalized;
-
-        Rigidbody Enemy = GetComponent<Rigidbody>();
-        Enemy.AddForce(knockbackDirection * (damageAmount*knockBackMultiplier));
     }
 
     void Die()
