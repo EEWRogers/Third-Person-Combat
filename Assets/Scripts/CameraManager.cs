@@ -6,28 +6,44 @@ using Cinemachine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] CinemachineFreeLook followCamera;
-    [SerializeField] CinemachineFreeLook lockCamera;
+    [SerializeField] CinemachineFreeLook lockOnCamera;
 
+    CinemachineBrain cinemachineBrain;
     PlayerController playerController;
 
     void Awake() 
     {
+        cinemachineBrain = GetComponent<CinemachineBrain>();
         playerController = FindObjectOfType<PlayerController>();
+        EnableFollowCamera();
     }
 
     public void LockOnTarget()
     {
         if (playerController.TargetLocked && playerController.ClosestEnemyByAngle != null)
         {
-            lockCamera.LookAt = playerController.ClosestEnemyByAngle.transform;
-            Debug.Log("Locked to " + playerController.ClosestEnemyByAngle.gameObject.name);
-            followCamera.gameObject.SetActive(false);
-            lockCamera.gameObject.SetActive(true);
+            if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == followCamera.gameObject)
+            {
+                EnableLockOnCamera();
+            }
+            // lockOnCamera.LookAt = playerController.ClosestEnemyByAngle.transform;
+            // Debug.Log("Locked to " + playerController.ClosestEnemyByAngle.gameObject.name);
         }
         else if (!playerController.TargetLocked || playerController.ClosestEnemyByAngle == null)
         {
-            followCamera.gameObject.SetActive(true);
-            lockCamera.gameObject.SetActive(false);
+            EnableFollowCamera();
         }
+    }
+
+    void EnableFollowCamera()
+    {
+        followCamera.Priority = 10;
+        lockOnCamera.Priority = 0;
+    }
+
+    void EnableLockOnCamera()
+    {
+        followCamera.Priority = 0;
+        lockOnCamera.Priority = 10;
     }
 }

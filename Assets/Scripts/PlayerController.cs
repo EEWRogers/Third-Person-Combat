@@ -1,10 +1,3 @@
-//     void Update() 
-//     {
-
-//         Debug.Log (attackAction.triggered);
-//         Debug.Log (blockAction.ReadValue<float>());
-//     }
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
