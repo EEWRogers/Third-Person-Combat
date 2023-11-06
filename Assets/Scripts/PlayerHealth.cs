@@ -1,31 +1,28 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] float maxHealth = 10f;
     float currentHealth;
+    SceneLoader sceneLoader;
 
     void Awake()
     {
         currentHealth = maxHealth;
+        sceneLoader = FindObjectOfType<SceneLoader>();
     }
 
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
-        Debug.Log("Ouch! My health is now " + currentHealth);
+        Debug.Log("You only have " + currentHealth + " left!");
 
-        if (currentHealth <= 0f)
+        if (currentHealth <= 0)
         {
-            Die();
+            sceneLoader.ReloadLevel();
         }
     }
 
-    void Die()
-    {
-        Destroy(gameObject);
-    }
 }
