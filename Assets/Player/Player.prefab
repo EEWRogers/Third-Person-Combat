@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0375b7f8a2478f046b0919ea973d7d91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
 --- !u!1 &7705248067814497905
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,13 +471,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3684593710052740617}
     m_Modifications:
-    - target: {fileID: 730699482341043706, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
-      propertyPath: knockBackMultiplier
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 4338491649786842914, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
       propertyPath: m_Name
-      value: Weapon
+      value: Player Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 4628498158465813126, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
       propertyPath: m_LocalPosition.x

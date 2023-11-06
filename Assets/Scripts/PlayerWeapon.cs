@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class PlayerWeapon : MonoBehaviour
 {
-    [SerializeField] private float weaponDamage = 1f;
-    [SerializeField] private float knockBackMultiplier = 100f;
-    private EnemyHealth targetHealth;
-    private Rigidbody targetRigidbody;
-    private Transform player;
-    private Vector3 knockbackDirection;
-
-    void Awake()
-    {
-        player = gameObject.GetComponentInParent<Transform>();
-    }
+    [SerializeField] float weaponDamage = 1f;
+    [SerializeField] float knockBackMultiplier = 100f;
+    EnemyHealth targetHealth;
+    Rigidbody targetRigidbody;
+    Vector3 knockbackDirection;
 
     void OnTriggerEnter(Collider other)
     {
@@ -23,8 +17,8 @@ public class Weapon : MonoBehaviour
 
         if (targetHealth && targetRigidbody != null)
         {
-        targetHealth.TakeDamage(weaponDamage);
-        KnockBack(other.transform, other.GetComponent<Rigidbody>());
+            targetHealth.TakeDamage(weaponDamage);
+            KnockBack(other.transform, other.GetComponent<Rigidbody>());
         }
     }
 

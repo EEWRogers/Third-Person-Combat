@@ -29,14 +29,14 @@ public class PlayerController : MonoBehaviour
     InputAction attackAction;
     InputAction blockAction;
 
-    Weapon currentWeapon;
+    PlayerWeapon currentWeapon;
     Transform cameraTransformReference;
     
 
     void Awake() 
     {
         cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
-        currentWeapon = FindObjectOfType<Weapon>(); //this is inelegant, need a solution without searching whole scene for a weapon
+        currentWeapon = FindObjectOfType<PlayerWeapon>(); //this is inelegant, need a solution without searching whole scene for a weapon
         currentWeapon.GetComponent<BoxCollider>().enabled = false;
     }
 
