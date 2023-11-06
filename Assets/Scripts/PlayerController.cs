@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float rotationSpeed = 5f;
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float gravityValue = -9.81f;
+    [SerializeField] float lockOnRange = 10f;
     
     CharacterController controller;
     Vector3 playerVelocity;
@@ -28,9 +29,11 @@ public class PlayerController : MonoBehaviour
     InputAction jumpAction;
     InputAction attackAction;
     InputAction blockAction;
+    InputAction targetLockAction;
 
     PlayerWeapon currentWeapon;
     Transform cameraTransformReference;
+    GameObject closestEnemyByAngle;
     
 
     void Awake() 
@@ -50,11 +53,14 @@ public class PlayerController : MonoBehaviour
         jumpAction = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
         blockAction = playerInput.actions["Block"];
+        targetLockAction = playerInput.actions["Target Lock"];
     }
 
     void Update()
     {
         CheckIfGrounded();
+
+        ScanForNearbyTargets();
 
         MovePlayer();
 
@@ -63,6 +69,8 @@ public class PlayerController : MonoBehaviour
         RotateTowardsCamera();
 
         Attack();
+
+        ToggleLockOn();
     }
 
     void CheckIfGrounded()
@@ -72,6 +80,28 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y = 0f;
         }
+    }
+
+    void ScanForNearbyTargets()
+    {
+        float closestAngle = Mathf.Infinity;
+        Collider [] nearbyTargets = Physics.OverlapSphere(transform.position, lockOnRange);
+        foreach (Collider target in nearbyTargets)
+        {
+
+            if (target.CompareTag("Enemy"))
+            {
+                Vector3 targetDirection = target.transform.position - transform.position;
+                float angle = Vector3.Angle(transform.forward, targetDirection);
+                if (angle < closestAngle)
+                {
+                    closestAngle = angle;
+                    closestEnemyByAngle = target.gameObject;
+                }
+            }
+
+        }
+        Debug.Log(closestEnemyByAngle.name);
     }
 
     void MovePlayer()
@@ -115,12 +145,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void ToggleLockOn()
+    {
+        if (targetLockAction.triggered)
+        {
+            Debug.Log("Target Locked!");
+        }
+    }
+
     void EnableWeapon()
     {
         currentWeapon.GetComponent<BoxCollider>().enabled = true;
     }
 
-        void DisableWeapon()
+    void DisableWeapon()
     {
         currentWeapon.GetComponent<BoxCollider>().enabled = false;
     }
