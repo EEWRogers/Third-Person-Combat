@@ -256,7 +256,7 @@ Transform:
   m_GameObject: {fileID: 234080101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0030013155, y: 6, z: -3.9999988}
+  m_LocalPosition: {x: 0.0030013938, y: 6, z: -3.9999988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -603,8 +603,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.0003381214, z: 0.00016250956, w: 0.9013032}
-  m_LocalPosition: {x: 1.5030009, y: 6, z: -3.9988735}
+  m_LocalRotation: {x: 0.4331887, y: -0.0003381302, z: 0.00016251377, w: 0.9013032}
+  m_LocalPosition: {x: 1.503001, y: 6, z: -3.9988732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -784,7 +784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173308711}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.00033815188, z: 0.00016252419, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.00033816067, z: 0.00016252842, w: 0.9013032}
   m_LocalPosition: {x: -0.0000000023283064, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -924,7 +924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214673191}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.0003381214, z: 0.00016250956, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.0003381302, z: 0.00016251377, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1072,7 +1072,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436431686}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.0003381214, z: 0.00016250956, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.0003381302, z: 0.00016251377, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

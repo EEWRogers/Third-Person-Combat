@@ -8,8 +8,10 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float chaseRange = 10f;
-    [SerializeField] float turnSpeed = 5f;
+    [SerializeField] float turnSpeed = 50f;
+    [SerializeField] float maxAttackAngle = 25f;
 
+    Vector3 directionOfPlayer;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
 
@@ -25,6 +27,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         distanceToTarget = Vector3.Distance(transform.position, target.position);
+        directionOfPlayer = target.position - transform.position;
 
         if (isProvoked)
         {
@@ -39,6 +42,7 @@ public class EnemyAI : MonoBehaviour
 
     void EngageTarget()
     {
+        float angle = Vector3.Angle(transform.forward, directionOfPlayer);
         FacePlayer();
 
         if (distanceToTarget >= navMeshAgent.stoppingDistance)
@@ -47,7 +51,10 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            AttackPlayer();
+            if (angle < maxAttackAngle)
+            {
+                AttackPlayer();
+            }
         }
     }
 
