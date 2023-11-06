@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Vector3 playerVelocity;
     bool groundedPlayer;
+    bool targetLocked = false;
+    public bool TargetLocked { get { return targetLocked; } }
     Transform cameraTransform;
     PlayerInput playerInput;
     InputAction moveAction;
@@ -33,7 +35,9 @@ public class PlayerController : MonoBehaviour
 
     PlayerWeapon currentWeapon;
     Transform cameraTransformReference;
+    CameraManager cameraManager;
     GameObject closestEnemyByAngle;
+    public GameObject ClosestEnemyByAngle { get { return closestEnemyByAngle; } }
     
 
     void Awake() 
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
         cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
         currentWeapon = FindObjectOfType<PlayerWeapon>(); //this is inelegant, need a solution without searching whole scene for a weapon
         currentWeapon.GetComponent<BoxCollider>().enabled = false;
+        cameraManager = FindObjectOfType<CameraManager>();
     }
 
     void Start()
@@ -101,7 +106,10 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        Debug.Log(closestEnemyByAngle.name);
+        if (closestEnemyByAngle != null)
+        {
+            Debug.Log(closestEnemyByAngle.name);
+        }
     }
 
     void MovePlayer()
@@ -147,9 +155,10 @@ public class PlayerController : MonoBehaviour
 
     void ToggleLockOn()
     {
-        if (targetLockAction.triggered)
+        if (targetLockAction.triggered && closestEnemyByAngle != null)
         {
-            Debug.Log("Target Locked!");
+            targetLocked = !targetLocked;
+            cameraManager.LockOnTarget();
         }
     }
 
