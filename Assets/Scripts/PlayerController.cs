@@ -11,34 +11,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float rotationSpeed = 5f;
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float gravityValue = -9.81f;
-    [SerializeField] float lockOnRange = 10f;
     
     CharacterController controller;
     Vector3 playerVelocity;
     bool groundedPlayer;
-    bool targetLocked = false;
-    public bool TargetLocked { get { return targetLocked; } }
     Transform cameraTransform;
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction jumpAction;
     InputAction attackAction;
     InputAction blockAction;
-    InputAction targetLockAction;
 
     PlayerWeapon currentWeapon;
     Transform cameraTransformReference;
-    CameraManager cameraManager;
-    GameObject closestEnemyByAngle;
-    public GameObject ClosestEnemyByAngle { get { return closestEnemyByAngle; } }
-    
 
     void Awake() 
     {
         cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
         currentWeapon = FindObjectOfType<PlayerWeapon>(); //this is inelegant, need a solution without searching whole scene for a weapon
         currentWeapon.GetComponent<BoxCollider>().enabled = false;
-        cameraManager = FindObjectOfType<CameraManager>();
     }
 
     void Start()
@@ -51,24 +42,20 @@ public class PlayerController : MonoBehaviour
         jumpAction = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
         blockAction = playerInput.actions["Block"];
-        targetLockAction = playerInput.actions["Target Lock"];
     }
 
     void Update()
     {
         CheckIfGrounded();
 
-        ScanForNearbyTargets();
-
         MovePlayer();
 
         JumpPlayer();
 
-        RotateTowardsCamera();
+        RotateTowardsCameraForward();
 
         Attack();
 
-        ToggleLockOn();
     }
 
     void CheckIfGrounded()
@@ -77,31 +64,6 @@ public class PlayerController : MonoBehaviour
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
-        }
-    }
-
-    void ScanForNearbyTargets()
-    {
-        float closestAngle = Mathf.Infinity;
-        Collider [] nearbyTargets = Physics.OverlapSphere(transform.position, lockOnRange);
-        foreach (Collider target in nearbyTargets)
-        {
-
-            if (target.CompareTag("Enemy"))
-            {
-                Vector3 targetDirection = target.transform.position - transform.position;
-                float angle = Vector3.Angle(transform.forward, targetDirection);
-                if (angle < closestAngle)
-                {
-                    closestAngle = angle;
-                    closestEnemyByAngle = target.gameObject;
-                }
-            }
-
-        }
-        if (closestEnemyByAngle != null)
-        {
-            Debug.Log(closestEnemyByAngle.name);
         }
     }
 
@@ -131,10 +93,10 @@ public class PlayerController : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    void RotateTowardsCamera()
+    void RotateTowardsCameraForward()
     {
-        float targetAngle = cameraTransform.eulerAngles.y;
-        Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
+        float cameraForward = cameraTransform.eulerAngles.y;
+        Quaternion targetRotation = Quaternion.Euler(0, cameraForward, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
@@ -143,15 +105,6 @@ public class PlayerController : MonoBehaviour
         if (attackAction.triggered)
         {
             GetComponent<Animator>().SetTrigger("attack");
-        }
-    }
-
-    void ToggleLockOn()
-    {
-        if (targetLockAction.triggered && closestEnemyByAngle != null)
-        {
-            targetLocked = !targetLocked;
-            cameraManager.LockOnTarget();
         }
     }
 
