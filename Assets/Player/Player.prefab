@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 3838021569309340788}
   - component: {fileID: 5494065993250755076}
   - component: {fileID: 1669326581713748171}
+  - component: {fileID: 5552980037540659380}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -212,7 +213,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -233,7 +234,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
-  rotationSpeed: 10
   jumpHeight: 1
   gravityValue: -9.81
 --- !u!143 &839830243101764120
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: b1ce6ce02738f1840a7311be43fdfdfc, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -286,7 +286,31 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c2d04e6d-4c1c-476c-90c9-20102c4fdb2f
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7e542ed-f08b-4207-9e43-10ac016a4152
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c830a7a-7149-46e0-ac2b-5a81bb6891af
+    m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4203cda5-9d85-4ac0-9008-98d79fbf327d
+    m_ActionName: Player/Block[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 41614433-d748-4682-99d2-9a63f316a0fc
+    m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e717b101-6452-49c7-a19c-de89ce70c2b2
+    m_ActionName: Player/Target Lock[/Mouse/middleButton,/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -326,6 +350,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+--- !u!54 &5552980037540659380
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290293353632203918}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &7705248067814497905
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +490,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3684593710052740617}
     m_Modifications:
+    - target: {fileID: 730699482341043706, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
+      propertyPath: weaponDamage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4338491649786842914, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
       propertyPath: m_Name
       value: Player Weapon

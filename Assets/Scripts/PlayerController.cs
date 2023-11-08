@@ -26,21 +26,33 @@ public class PlayerController : MonoBehaviour
 
     void Awake() 
     {
-        cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
-        currentWeapon = FindObjectOfType<PlayerWeapon>(); //this is inelegant, need a solution without searching whole scene for a weapon
-        currentWeapon.GetComponent<BoxCollider>().enabled = false;
-    }
-
-    void Start()
-    {
-        controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        cameraTransform = Camera.main.transform;
-
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
         blockAction = playerInput.actions["Block"];
+
+        controller = GetComponent<CharacterController>();
+
+        cameraTransform = Camera.main.transform;
+        cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
+
+        currentWeapon = FindObjectOfType<PlayerWeapon>(); //this is inelegant, need a solution without searching whole scene for a weapon
+        currentWeapon.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    void OnEnable() 
+    {
+        attackAction.performed += Attack;
+        blockAction.started += StartBlocking;
+        blockAction.canceled += StopBlocking;
+    }
+
+    void OnDisable() 
+    {
+        attackAction.performed -= Attack;
+        blockAction.started -= StartBlocking;
+        blockAction.canceled -= StopBlocking;
     }
 
     void Update()
@@ -50,8 +62,6 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
 
         JumpPlayer();
-
-        Block();
 
     }
 
@@ -90,17 +100,19 @@ public class PlayerController : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    void OnAttack()
+    void Attack(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetTrigger("attack");
     }
 
-    void Block()
+    void StartBlocking(InputAction.CallbackContext context)
     {
-        if (blockAction.ReadValue<float>() == 1)
-        {
-            Debug.Log("Blocking!");
-        }
+        Debug.Log("Blocking!");
+    }
+
+    void StopBlocking(InputAction.CallbackContext context)
+    {
+        Debug.Log("Stopped blocking!");
     }
 
     void EnableWeapon()
