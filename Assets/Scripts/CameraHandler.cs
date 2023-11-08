@@ -15,11 +15,11 @@ public class CameraHandler : MonoBehaviour
     [SerializeField] float rotationSpeed = 5f;
 
     CinemachineBrain cinemachineBrain;
-
     PlayerInput player;
     InputAction targetLockAction;
     Transform cameraTransform;
     GameObject closestEnemyByAngle;
+    bool lockedOn = false;
     
     void Awake() 
     {
@@ -39,8 +39,21 @@ public class CameraHandler : MonoBehaviour
         HandleRotation();
         ScanForNearbyTargets();
         LockOnTarget();
-        Debug.Log(targetLockAction.triggered);
-        Debug.Log(closestEnemyByAngle);
+        HandleMissingTarget();
+    }
+
+    public void HandleRotation()
+    {
+        if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == followCamera.gameObject)
+        {
+            RotateTowardsCameraForward();
+        }
+
+        if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == lockOnCamera.gameObject)
+        {
+            if (closestEnemyByAngle == null) { return; }
+            RotateTowardsTarget();
+        }
     }
 
     void ScanForNearbyTargets()
@@ -80,8 +93,28 @@ public class CameraHandler : MonoBehaviour
         }
     }
 
+    void HandleMissingTarget()
+    {
+        if (lockOnCamera.LookAt == null)
+        {
+            if (closestEnemyByAngle == null)
+            {
+                EnableFollowCamera();
+            }
+            
+            else
+            {
+                if (lockedOn)
+                {
+                    EnableLockOnCamera();
+                }
+            }
+        }
+    }
+
     void EnableFollowCamera()
     {
+        lockedOn = false;
         lockOnCamera.LookAt = null;
         followCamera.Priority = 10;
         lockOnCamera.Priority = 0;
@@ -89,22 +122,10 @@ public class CameraHandler : MonoBehaviour
 
     void EnableLockOnCamera()
     {
+        lockedOn = true;
         lockOnCamera.LookAt = closestEnemyByAngle.transform;
         followCamera.Priority = 0;
         lockOnCamera.Priority = 10;
-    }
-
-    public void HandleRotation()
-    {
-        if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == followCamera.gameObject)
-        {
-            RotateTowardsCameraForward();
-        }
-
-        if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == lockOnCamera.gameObject)
-        {
-            RotateTowardsTarget();
-        }
     }
 
     void RotateTowardsCameraForward()
@@ -121,7 +142,12 @@ public class CameraHandler : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         player.transform.rotation = Quaternion.Lerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        // locks camera behind player
+        LockCameraBehindPlayer(targetRotation);
+    }
+
+    void LockCameraBehindPlayer(Quaternion targetRotation)
+    {
         lockOnCamera.m_XAxis.Value = Mathf.LerpAngle(lockOnCamera.m_XAxis.Value, targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
     }
+
 }
