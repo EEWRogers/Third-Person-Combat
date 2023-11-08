@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float playerSpeed = 2.0f;
-    [SerializeField] float rotationSpeed = 5f;
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float gravityValue = -9.81f;
     
@@ -52,8 +51,6 @@ public class PlayerController : MonoBehaviour
 
         JumpPlayer();
 
-        RotateTowardsCameraForward();
-
         Attack();
 
     }
@@ -91,13 +88,6 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
-    }
-
-    void RotateTowardsCameraForward()
-    {
-        float cameraForward = cameraTransform.eulerAngles.y;
-        Quaternion targetRotation = Quaternion.Euler(0, cameraForward, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     void Attack()

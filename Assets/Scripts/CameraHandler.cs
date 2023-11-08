@@ -5,18 +5,20 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using System;
 
-public class LockOnHandler : MonoBehaviour
+public class CameraHandler : MonoBehaviour
 {
     [SerializeField] CinemachineFreeLook followCamera;
     [SerializeField] CinemachineFreeLook lockOnCamera;
 
     [SerializeField] float lockOnRange = 10f;
     [SerializeField] float maximumLockOnAngle = 90f;
+    [SerializeField] float rotationSpeed = 5f;
 
     CinemachineBrain cinemachineBrain;
 
     PlayerInput player;
     InputAction targetLockAction;
+    Transform cameraTransform;
     GameObject closestEnemyByAngle;
     
     void Awake() 
@@ -28,11 +30,13 @@ public class LockOnHandler : MonoBehaviour
     void Start() 
     {
         targetLockAction = player.actions["Target Lock"];
+        cameraTransform = Camera.main.transform;
         EnableFollowCamera();
     }
 
     void Update() 
     {
+        HandleRotation();
         ScanForNearbyTargets();
         LockOnTarget();
         Debug.Log(targetLockAction.triggered);
@@ -90,10 +94,34 @@ public class LockOnHandler : MonoBehaviour
         lockOnCamera.Priority = 10;
     }
 
-    void RotateTowardsTarget()
+    public void HandleRotation()
+    {
+        if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == followCamera.gameObject)
+        {
+            RotateTowardsCameraForward();
+        }
+
+        if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == lockOnCamera.gameObject)
+        {
+            RotateTowardsTarget();
+        }
+    }
+
+    void RotateTowardsCameraForward()
     {
         float cameraForward = cameraTransform.eulerAngles.y;
         Quaternion targetRotation = Quaternion.Euler(0, cameraForward, 0);
-        transform.rotation = Quaternion.Lerp(transform. rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        player.transform.rotation = Quaternion.Lerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    void RotateTowardsTarget()
+    {
+        Vector3 direction = (closestEnemyByAngle.transform.position - player.transform.position);
+        direction.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        player.transform.rotation = Quaternion.Lerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // locks camera behind player
+        lockOnCamera.m_XAxis.Value = Mathf.LerpAngle(lockOnCamera.m_XAxis.Value, targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
     }
 }
