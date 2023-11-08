@@ -50,8 +50,6 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
 
         JumpPlayer();
-        
-        Attack();
 
         Block();
 
@@ -92,12 +90,9 @@ public class PlayerController : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    void Attack()
+    void OnAttack()
     {
-        if (attackAction.triggered)
-        {
-            GetComponent<Animator>().SetTrigger("attack");
-        }
+        GetComponent<Animator>().SetTrigger("attack");
     }
 
     void Block()
