@@ -19,6 +19,7 @@ public class CameraHandler : MonoBehaviour
     InputAction targetLockAction;
     Transform cameraTransform;
     GameObject closestEnemyByAngle;
+    GameObject currentLockOnTarget;
     bool lockedOn = false;
     
     void Awake() 
@@ -51,7 +52,7 @@ public class CameraHandler : MonoBehaviour
 
         if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == lockOnCamera.gameObject)
         {
-            if (closestEnemyByAngle == null) { return; }
+            if (currentLockOnTarget == null) { return; }
             RotateTowardsTarget();
         }
     }
@@ -114,6 +115,7 @@ public class CameraHandler : MonoBehaviour
 
     void EnableFollowCamera()
     {
+        currentLockOnTarget = null;
         lockedOn = false;
         lockOnCamera.LookAt = null;
         followCamera.Priority = 10;
@@ -122,8 +124,9 @@ public class CameraHandler : MonoBehaviour
 
     void EnableLockOnCamera()
     {
+        currentLockOnTarget = closestEnemyByAngle;
         lockedOn = true;
-        lockOnCamera.LookAt = closestEnemyByAngle.transform;
+        lockOnCamera.LookAt = currentLockOnTarget.transform;
         followCamera.Priority = 0;
         lockOnCamera.Priority = 10;
     }
@@ -137,7 +140,7 @@ public class CameraHandler : MonoBehaviour
 
     void RotateTowardsTarget()
     {
-        Vector3 direction = (closestEnemyByAngle.transform.position - player.transform.position);
+        Vector3 direction = (currentLockOnTarget.transform.position - player.transform.position);
         direction.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         player.transform.rotation = Quaternion.Lerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
