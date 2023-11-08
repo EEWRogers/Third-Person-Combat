@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     
     CharacterController controller;
     Vector3 playerVelocity;
-    bool groundedPlayer;
+    bool playerGrounded;
     Transform cameraTransform;
     PlayerInput playerInput;
     InputAction moveAction;
@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour
 
     void CheckIfGrounded()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        playerGrounded = controller.isGrounded;
+        if (playerGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     void JumpPlayer()
     {
         // Changes the height position of the player.
-        if (jumpAction.triggered && groundedPlayer)
+        if (jumpAction.triggered && playerGrounded)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
