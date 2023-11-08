@@ -50,8 +50,10 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
 
         JumpPlayer();
-
+        
         Attack();
+
+        Block();
 
     }
 
@@ -95,6 +97,14 @@ public class PlayerController : MonoBehaviour
         if (attackAction.triggered)
         {
             GetComponent<Animator>().SetTrigger("attack");
+        }
+    }
+
+    void Block()
+    {
+        if (blockAction.ReadValue<float>() == 1)
+        {
+            Debug.Log("Blocking!");
         }
     }
 
