@@ -28,6 +28,7 @@ public class LockOnHandler : MonoBehaviour
     void Start() 
     {
         targetLockAction = player.actions["Target Lock"];
+        EnableFollowCamera();
     }
 
     void Update() 
@@ -87,5 +88,12 @@ public class LockOnHandler : MonoBehaviour
         lockOnCamera.LookAt = closestEnemyByAngle.transform;
         followCamera.Priority = 0;
         lockOnCamera.Priority = 10;
+    }
+
+    void RotateTowardsTarget()
+    {
+        float cameraForward = cameraTransform.eulerAngles.y;
+        Quaternion targetRotation = Quaternion.Euler(0, cameraForward, 0);
+        transform.rotation = Quaternion.Lerp(transform. rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }
