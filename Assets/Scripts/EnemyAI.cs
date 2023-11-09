@@ -90,6 +90,7 @@ public class EnemyAI : MonoBehaviour
         {
             animator.SetTrigger("parried");
             Debug.Log("Attack parried!");
+            player.GainParryInvulnerability();
 
             DisableParryWindow();
         }

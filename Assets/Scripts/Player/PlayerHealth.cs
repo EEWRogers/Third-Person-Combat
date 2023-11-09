@@ -74,6 +74,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void GainParryInvulnerability()
+    {
+        damageCooldownTime = invulnerabilityTime;
+    }
+
     void StartBlocking(InputAction.CallbackContext context)
     {
         isBlocking = true;
