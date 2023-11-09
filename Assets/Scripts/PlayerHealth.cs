@@ -7,8 +7,10 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] float maxHealth = 10f;
     [SerializeField] float blockDamageReductionPercent = 50;
+    [SerializeField] float invulnerabilityTime = 1f;
 
     float currentHealth;
+    float damageCooldownTime = 0f;
     bool isBlocking = false;
     public bool IsBlocking { get { return isBlocking; } }
 
@@ -40,8 +42,20 @@ public class PlayerHealth : MonoBehaviour
         blockAction.canceled -= StopBlocking;
     }
 
+    void Update() 
+    {
+        if (damageCooldownTime > 0)
+        {
+            damageCooldownTime -= Time.deltaTime;
+        }
+    }
+
     public void TakeDamage(float damageAmount)
     {
+        if (damageCooldownTime > 0) { return; }
+
+        damageCooldownTime = invulnerabilityTime;
+        
         if (isBlocking)
         {
             currentHealth -= (damageAmount * (blockDamageReductionPercent / 100));
