@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
         if (targetHealth && targetRigidbody != null)
         {
             targetHealth.TakeDamage(weaponDamage);
-            KnockBack(other.transform, other.GetComponent<Rigidbody>());
+            KnockBack(other.transform, targetRigidbody);
         }
     }
 

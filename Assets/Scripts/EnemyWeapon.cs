@@ -5,18 +5,26 @@ using UnityEngine;
 public class EnemyWeapon : MonoBehaviour
 {
     [SerializeField] float weaponDamage = 1f;
+
+    public BoxCollider weaponCollider;
     PlayerHealth playerHealth;
     Rigidbody targetRigidbody;
     Vector3 knockbackDirection;
 
+    void Awake() 
+    {
+        weaponCollider = GetComponent<BoxCollider>();
+        weaponCollider.enabled = false;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         playerHealth = other.gameObject.GetComponent<PlayerHealth>();
-        targetRigidbody = other.gameObject.GetComponent<Rigidbody>();
 
-        if (playerHealth && targetRigidbody != null)
+        if (playerHealth != null)
         {
             playerHealth.TakeDamage(weaponDamage);
         }
     }
+    
 }

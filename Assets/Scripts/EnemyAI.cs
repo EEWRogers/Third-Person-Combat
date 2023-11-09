@@ -16,15 +16,15 @@ public class EnemyAI : MonoBehaviour
     bool isProvoked = false;
 
     NavMeshAgent navMeshAgent;
+    EnemyWeapon enemyWeapon;
     Animator animator;
-    EnemyWeapon currentWeapon;
+
 
     void Awake() 
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        currentWeapon = FindObjectOfType<EnemyWeapon>(); //this is inelegant, need a solution without searching whole scene for a weapon
-        currentWeapon.GetComponent<BoxCollider>().enabled = false;
+        enemyWeapon = GetComponentInChildren<EnemyWeapon>();
     }
 
     void Update()
@@ -81,11 +81,11 @@ public class EnemyAI : MonoBehaviour
 
     void EnableWeapon()
     {
-        currentWeapon.GetComponent<BoxCollider>().enabled = true;
+        enemyWeapon.weaponCollider.enabled = true;
     }
 
     void DisableWeapon()
     {
-        currentWeapon.GetComponent<BoxCollider>().enabled = false;
+        enemyWeapon.weaponCollider.enabled = false;
     }
 }

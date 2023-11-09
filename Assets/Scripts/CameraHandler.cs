@@ -25,13 +25,11 @@ public class CameraHandler : MonoBehaviour
     void Awake() 
     {
         cinemachineBrain = GetComponent<CinemachineBrain>();
-        player = FindObjectOfType<PlayerInput>();
-    }
-
-    void Start() 
-    {
-        targetLockAction = player.actions["Target Lock"];
         cameraTransform = Camera.main.transform;
+        player = FindObjectOfType<PlayerInput>();
+        targetLockAction = player.actions["Target Lock"];
+
+
         EnableFollowCamera();
     }
 
