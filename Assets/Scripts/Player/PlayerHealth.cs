@@ -78,14 +78,12 @@ public class PlayerHealth : MonoBehaviour
     {
         isBlocking = true;
         playerAnimator.SetBool("blocking", isBlocking);
-        Debug.Log(isBlocking);
     }
 
     void StopBlocking(InputAction.CallbackContext context)
     {
         isBlocking = false;
         playerAnimator.SetBool("blocking", isBlocking);
-        Debug.Log(isBlocking);
     }
 
 }

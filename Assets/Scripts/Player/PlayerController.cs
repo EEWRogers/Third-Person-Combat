@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput), typeof(PlayerHealth))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float playerSpeed = 2.0f;

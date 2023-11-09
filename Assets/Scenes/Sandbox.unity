@@ -256,7 +256,7 @@ Transform:
   m_GameObject: {fileID: 234080101}
   serializedVersion: 2
   m_LocalRotation: {x: -0.4331887, y: 0.00033871128, z: -0.00016279309, w: 0.9013032}
-  m_LocalPosition: {x: -1.5, y: 0.00000005901434, z: 0.00000007163349}
+  m_LocalPosition: {x: -1.5, y: 0.000000059013253, z: 0.000000071631526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263737424}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25084135, y: 0.000000016220078, z: -0.0000000042030446, w: 0.96802825}
+  m_LocalRotation: {x: 0.25084135, y: 0.000000016207366, z: -0.000000004199751, w: 0.96802825}
   m_LocalPosition: {x: 1.5, y: 3.5, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1684,7 +1684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214673191}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.0003386645, z: 0.00016278472, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.0003386645, z: 0.00016278471, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2566,6 +2566,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -58.071
       objectReference: {fileID: 0}
+    - target: {fileID: 1326555990261108555, guid: 6c5237627dffc30468f6a498028f3016, type: 3}
+      propertyPath: weaponDamage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1669326581713748171, guid: 6c5237627dffc30468f6a498028f3016, type: 3}
       propertyPath: invulnerabilityTime
       value: 0.5
@@ -2757,7 +2761,7 @@ PrefabInstance:
     - target: {fileID: 1375420649222705032, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 813934603331142056}
+      objectReference: {fileID: 0}
     - target: {fileID: 2544868858779448679, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2796,6 +2800,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2544868858779448679, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149632622728530331, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}
+      propertyPath: weaponDamage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8251687877500016730, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}

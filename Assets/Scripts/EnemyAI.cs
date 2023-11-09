@@ -6,16 +6,18 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] Transform target;
     [SerializeField] float chaseRange = 10f;
     [SerializeField] float turnSpeed = 50f;
     [SerializeField] float maxAttackAngle = 25f;
 
+    PlayerHealth player;
     Vector3 directionOfPlayer;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
+    bool isParriable = false;
 
     NavMeshAgent navMeshAgent;
+    PlayerHealth playerHealth;
     EnemyWeapon enemyWeapon;
     Animator animator;
 
@@ -25,12 +27,13 @@ public class EnemyAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyWeapon = GetComponentInChildren<EnemyWeapon>();
+        player = FindObjectOfType<PlayerHealth>();
     }
 
     void Update()
     {
-        distanceToTarget = Vector3.Distance(transform.position, target.position);
-        directionOfPlayer = target.position - transform.position;
+        distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
+        directionOfPlayer = player.transform.position - transform.position;
 
         if (isProvoked)
         {
@@ -41,6 +44,9 @@ public class EnemyAI : MonoBehaviour
         {
             isProvoked = true;
         }
+
+        Debug.Log("Player Blocking: " + player.IsBlocking);
+        Debug.Log("Attack Parriable: " + isParriable);
     }
 
     void EngageTarget()
@@ -63,20 +69,32 @@ public class EnemyAI : MonoBehaviour
 
     void ChasePlayer()
     {
-        navMeshAgent.SetDestination(target.position);
+        navMeshAgent.SetDestination(player.transform.position);
     }
 
     void AttackPlayer()
     {
+        BeParried();
         animator.SetTrigger("attack");
     }
 
     void FacePlayer()
     {
-        Vector3 direction = (target.position - transform.position);
+        Vector3 direction = (player.transform.position - transform.position);
         direction.y = 0;
         Quaternion lookRotation = Quaternion.LookRotation((direction.normalized));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, turnSpeed * Time.deltaTime);
+    }
+
+    void BeParried()
+    {
+        if (isParriable && player.IsBlocking)
+        {
+            animator.SetTrigger("parried");
+            Debug.Log("Attack parried!");
+
+            DisableParryWindow();
+        }
     }
 
     void EnableWeapon()
@@ -87,5 +105,18 @@ public class EnemyAI : MonoBehaviour
     void DisableWeapon()
     {
         enemyWeapon.weaponCollider.enabled = false;
+    }
+
+    void EnableParryWindow()
+    {
+        if (!player.IsBlocking)
+        {
+            isParriable = true;
+        }
+    }
+
+    void DisableParryWindow()
+    {
+        isParriable = false;
     }
 }
