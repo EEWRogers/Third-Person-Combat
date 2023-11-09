@@ -45,6 +45,8 @@ public class CameraHandler : MonoBehaviour
 
     public void HandleRotation()
     {
+        if (cinemachineBrain.ActiveVirtualCamera == null) { return; }
+
         if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == followCamera.gameObject)
         {
             RotateTowardsCameraForward();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeapon : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] float weaponDamage = 1f;
     [SerializeField] float knockBackMultiplier = 100f;
