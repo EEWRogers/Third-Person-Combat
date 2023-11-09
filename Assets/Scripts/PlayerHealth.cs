@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float blockDamageReductionPercent = 50;
 
     float currentHealth;
+    bool isBlocking = false;
 
     SceneLoader sceneLoader;
     PlayerInput playerInput;
@@ -36,7 +37,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        currentHealth -= damageAmount;
+        if (isBlocking)
+        {
+            currentHealth -= (damageAmount * (blockDamageReductionPercent / 100));
+        }
+        
+        else
+        {
+            currentHealth -= damageAmount;
+        }
+        
         Debug.Log("You only have " + currentHealth + " left!");
 
         if (currentHealth <= 0)
@@ -47,12 +57,14 @@ public class PlayerHealth : MonoBehaviour
 
     void StartBlocking(InputAction.CallbackContext context)
     {
-        Debug.Log("Blocking!");
+        isBlocking = true;
+        Debug.Log(isBlocking);
     }
 
     void StopBlocking(InputAction.CallbackContext context)
     {
-        Debug.Log("Stopped blocking!");
+        isBlocking = false;
+        Debug.Log(isBlocking);
     }
 
 }
