@@ -44,9 +44,6 @@ public class EnemyAI : MonoBehaviour
         {
             isProvoked = true;
         }
-
-        Debug.Log("Player Blocking: " + player.IsBlocking);
-        Debug.Log("Attack Parriable: " + isParriable);
     }
 
     void EngageTarget()
@@ -70,6 +67,7 @@ public class EnemyAI : MonoBehaviour
     void ChasePlayer()
     {
         navMeshAgent.SetDestination(player.transform.position);
+        animator.SetTrigger("stopAttack");
     }
 
     void AttackPlayer()
