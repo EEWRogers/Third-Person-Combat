@@ -17,11 +17,14 @@ public class EnemyAI : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
     Animator animator;
+    EnemyWeapon currentWeapon;
 
-    void Start() 
+    void Awake() 
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        currentWeapon = FindObjectOfType<EnemyWeapon>(); //this is inelegant, need a solution without searching whole scene for a weapon
+        currentWeapon.GetComponent<BoxCollider>().enabled = false;
     }
 
     void Update()
@@ -76,4 +79,13 @@ public class EnemyAI : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, turnSpeed * Time.deltaTime);
     }
 
+    void EnableWeapon()
+    {
+        currentWeapon.GetComponent<BoxCollider>().enabled = true;
+    }
+
+    void DisableWeapon()
+    {
+        currentWeapon.GetComponent<BoxCollider>().enabled = false;
+    }
 }
