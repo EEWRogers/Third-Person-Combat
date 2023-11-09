@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     Vector3 playerVelocity;
     bool playerGrounded;
     Transform cameraTransform;
+    Animator playerAnimator;
+    PlayerHealth playerHealth;
     PlayerInput playerInput;
     InputAction moveAction;
     InputAction jumpAction;
@@ -31,6 +33,8 @@ public class PlayerController : MonoBehaviour
         attackAction = playerInput.actions["Attack"];
 
         controller = GetComponent<CharacterController>();
+        playerHealth = GetComponent<PlayerHealth>();
+        playerAnimator = GetComponent<Animator>();
 
         cameraTransform = Camera.main.transform;
         cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
@@ -98,7 +102,9 @@ public class PlayerController : MonoBehaviour
 
     void Attack(InputAction.CallbackContext context)
     {
-        GetComponent<Animator>().SetTrigger("attack");
+        if (playerHealth.IsBlocking) { return; }
+
+        playerAnimator.SetTrigger("attack");
     }
 
     void EnableWeapon()

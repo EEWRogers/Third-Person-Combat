@@ -10,16 +10,21 @@ public class PlayerHealth : MonoBehaviour
 
     float currentHealth;
     bool isBlocking = false;
+    public bool IsBlocking { get { return isBlocking; } }
 
     SceneLoader sceneLoader;
+    Animator playerAnimator;
     PlayerInput playerInput;
     InputAction blockAction;
 
     void Awake()
     {
-        sceneLoader = FindObjectOfType<SceneLoader>();
         playerInput = GetComponent<PlayerInput>();
         blockAction = playerInput.actions["Block"];
+
+        sceneLoader = FindObjectOfType<SceneLoader>();
+        playerAnimator = GetComponent<Animator>();
+        
         currentHealth = maxHealth;
     }
 
@@ -58,12 +63,14 @@ public class PlayerHealth : MonoBehaviour
     void StartBlocking(InputAction.CallbackContext context)
     {
         isBlocking = true;
+        playerAnimator.SetBool("blocking", isBlocking);
         Debug.Log(isBlocking);
     }
 
     void StopBlocking(InputAction.CallbackContext context)
     {
         isBlocking = false;
+        playerAnimator.SetBool("blocking", isBlocking);
         Debug.Log(isBlocking);
     }
 
