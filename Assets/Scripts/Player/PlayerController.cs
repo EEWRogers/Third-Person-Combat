@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     InputAction jumpAction;
     InputAction attackAction;
 
-    PlayerAttack currentWeapon;
+    PlayerWeapon playerWeapon;
     Transform cameraTransformReference;
 
     void Awake() 
@@ -39,8 +39,7 @@ public class PlayerController : MonoBehaviour
         cameraTransform = Camera.main.transform;
         cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
 
-        currentWeapon = FindObjectOfType<PlayerAttack>(); //this is inelegant, need a solution without searching whole scene for a weapon
-        currentWeapon.GetComponent<BoxCollider>().enabled = false;
+        playerWeapon = GetComponentInChildren<PlayerWeapon>();
     }
 
     void OnEnable() 
@@ -109,11 +108,11 @@ public class PlayerController : MonoBehaviour
 
     void EnableWeapon()
     {
-        currentWeapon.GetComponent<BoxCollider>().enabled = true;
+        playerWeapon.weaponCollider.enabled = true;
     }
 
     void DisableWeapon()
     {
-        currentWeapon.GetComponent<BoxCollider>().enabled = false;
+        playerWeapon.weaponCollider.enabled = false;
     }
 }

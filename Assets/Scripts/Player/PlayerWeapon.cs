@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] float weaponDamage = 1f;
     [SerializeField] float knockBackMultiplier = 100f;
+
+    public BoxCollider weaponCollider;
     EnemyHealth targetHealth;
     Rigidbody targetRigidbody;
     Vector3 knockbackDirection;
+
+    void Awake() 
+    {
+        weaponCollider = GetComponent<BoxCollider>();
+        weaponCollider.enabled = false;
+    }
 
     void OnTriggerEnter(Collider other)
     {
