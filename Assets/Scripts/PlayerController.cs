@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     InputAction moveAction;
     InputAction jumpAction;
     InputAction attackAction;
-    InputAction blockAction;
 
     PlayerWeapon currentWeapon;
     Transform cameraTransformReference;
@@ -30,7 +29,6 @@ public class PlayerController : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
-        blockAction = playerInput.actions["Block"];
 
         controller = GetComponent<CharacterController>();
 
@@ -44,15 +42,13 @@ public class PlayerController : MonoBehaviour
     void OnEnable() 
     {
         attackAction.performed += Attack;
-        blockAction.started += StartBlocking;
-        blockAction.canceled += StopBlocking;
+        
     }
 
     void OnDisable() 
     {
         attackAction.performed -= Attack;
-        blockAction.started -= StartBlocking;
-        blockAction.canceled -= StopBlocking;
+
     }
 
     void Update()
@@ -103,16 +99,6 @@ public class PlayerController : MonoBehaviour
     void Attack(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetTrigger("attack");
-    }
-
-    void StartBlocking(InputAction.CallbackContext context)
-    {
-        Debug.Log("Blocking!");
-    }
-
-    void StopBlocking(InputAction.CallbackContext context)
-    {
-        Debug.Log("Stopped blocking!");
     }
 
     void EnableWeapon()
