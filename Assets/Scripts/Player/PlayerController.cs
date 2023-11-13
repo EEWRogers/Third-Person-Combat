@@ -9,10 +9,15 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float playerSpeed = 2.0f;
     [SerializeField] float jumpHeight = 1.0f;
+    [SerializeField] float dodgeStrength = 2.0f;
     [SerializeField] float gravityValue = -9.81f;
+    [SerializeField] float movementAccelerationDelay = 0.2f;
+    [SerializeField] float dodgeLength = 1.0f;
     
     CharacterController controller;
     Vector3 playerVelocity;
+    Vector2 currentInputVector;
+    Vector2 smoothInputVelocity;
     bool playerGrounded;
     bool isDodging = false;
     Transform cameraTransform;
@@ -61,13 +66,9 @@ public class PlayerController : MonoBehaviour
     {
         CheckIfGrounded();
 
-        if (!isDodging)
-        {
-            MovePlayer();
-        }
+        MovePlayer();
         
         JumpPlayer();
-
     }
 
     void CheckIfGrounded()
@@ -84,13 +85,22 @@ public class PlayerController : MonoBehaviour
         cameraTransformReference.eulerAngles = new Vector3(0, cameraTransform.eulerAngles.y, 0); //allows us to access the camera's direction without accounting for rotation
 
         Vector2 input = moveAction.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, 0, input.y);
+        currentInputVector = Vector2.SmoothDamp(currentInputVector, input, ref smoothInputVelocity, movementAccelerationDelay);
+        Vector3 move = new Vector3(currentInputVector.x, 0, currentInputVector.y);
 
         // ties the movement direction to the camera direction
         move = move.x * cameraTransform.right.normalized + move.z * cameraTransformReference.forward.normalized;
         move.y = 0f;
 
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        if (!isDodging)
+        {
+            controller.Move(move * Time.deltaTime * playerSpeed);
+        }
+        
+        else
+        {
+            controller.Move(move * Time.deltaTime * dodgeStrength);
+        }
     }
 
     void JumpPlayer()
@@ -116,10 +126,18 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDodging)
         {
-            isDodging = true;
-            Debug.Log("Dodging!");
-            isDodging = false;
+            StartCoroutine(PerformDodge());
         }
+    }
+
+    IEnumerator PerformDodge()
+    {
+        isDodging = true;
+        Debug.Log("Dodging!");
+
+        yield return new WaitForSeconds(dodgeLength);
+
+        isDodging = false;
     }
     void EnableWeapon()
     {

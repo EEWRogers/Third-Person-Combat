@@ -256,7 +256,7 @@ Transform:
   m_GameObject: {fileID: 234080101}
   serializedVersion: 2
   m_LocalRotation: {x: -0.4331887, y: 0.00033871128, z: -0.00016279309, w: 0.9013032}
-  m_LocalPosition: {x: -1.5, y: 0.000000058930205, z: 0.000000071482035}
+  m_LocalPosition: {x: -1.5, y: 0.0000000590155, z: 0.00000007163557}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263737424}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25084135, y: 0.000000016229636, z: -0.0000000042055226, w: 0.96802825}
+  m_LocalRotation: {x: 0.25084135, y: 0.000000016219769, z: -0.0000000042029646, w: 0.96802825}
   m_LocalPosition: {x: 1.5, y: 3.5, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1465,7 +1465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173308711}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.00033869935, z: 0.00016278678, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.00033869944, z: 0.00016278679, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1684,7 +1684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214673191}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.00033866457, z: 0.00016278472, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.0003386645, z: 0.00016278472, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1921,7 +1921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436431686}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.00033867016, z: 0.00016278506, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.0003386702, z: 0.00016278506, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2617,6 +2617,22 @@ PrefabInstance:
     - target: {fileID: 5552980037540659380, guid: 6c5237627dffc30468f6a498028f3016, type: 3}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917631757894655580, guid: 6c5237627dffc30468f6a498028f3016, type: 3}
+      propertyPath: dodgeTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917631757894655580, guid: 6c5237627dffc30468f6a498028f3016, type: 3}
+      propertyPath: dodgeLength
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917631757894655580, guid: 6c5237627dffc30468f6a498028f3016, type: 3}
+      propertyPath: dodgeStrength
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917631757894655580, guid: 6c5237627dffc30468f6a498028f3016, type: 3}
+      propertyPath: dodgeMultiplier
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7290293353632203918, guid: 6c5237627dffc30468f6a498028f3016, type: 3}
       propertyPath: m_Name
