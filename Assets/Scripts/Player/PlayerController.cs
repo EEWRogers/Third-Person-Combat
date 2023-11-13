@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
     void Dodge(InputAction.CallbackContext context)
     {
-        if (!isDodging)
+        if (!isDodging && !playerHealth.IsBlocking)
         {
             StartCoroutine(PerformDodge());
         }
@@ -133,11 +133,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator PerformDodge()
     {
         isDodging = true;
+        playerHealth.canBlock = false;
         Debug.Log("Dodging!");
 
         yield return new WaitForSeconds(dodgeLength);
 
         isDodging = false;
+        playerHealth.canBlock = true;
     }
     void EnableWeapon()
     {

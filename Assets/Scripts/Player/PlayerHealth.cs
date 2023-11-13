@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     float damageCooldownTime = 0f;
     bool isBlocking = false;
     public bool IsBlocking { get { return isBlocking; } }
+    public bool canBlock = true;
 
     SceneLoader sceneLoader;
     Animator playerAnimator;
@@ -81,8 +82,11 @@ public class PlayerHealth : MonoBehaviour
 
     void StartBlocking(InputAction.CallbackContext context)
     {
-        isBlocking = true;
-        playerAnimator.SetBool("blocking", isBlocking);
+        if (canBlock)
+        {
+            isBlocking = true;
+            playerAnimator.SetBool("blocking", isBlocking);
+        }
     }
 
     void StopBlocking(InputAction.CallbackContext context)
