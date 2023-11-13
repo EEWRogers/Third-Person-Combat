@@ -19,6 +19,7 @@ public class CameraHandler : MonoBehaviour
     InputAction targetLockAction;
     Transform cameraTransform;
     GameObject closestEnemyByAngle;
+    float closestAngleToCamera;
     GameObject currentLockOnTarget;
     bool lockedOn = false;
     
@@ -59,7 +60,7 @@ public class CameraHandler : MonoBehaviour
 
     void ScanForNearbyTargets()
     {
-        float closestAngleToCamera = Mathf.Infinity;
+        closestAngleToCamera = Mathf.Infinity;
         Collider [] nearbyTargets = Physics.OverlapSphere(player.transform.position, lockOnRange);
         foreach (Collider target in nearbyTargets)
         {
@@ -82,7 +83,7 @@ public class CameraHandler : MonoBehaviour
     {
         if (targetLockAction.triggered)
         {
-            if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == followCamera.gameObject)
+            if (cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject == followCamera.gameObject && closestAngleToCamera <= maximumLockOnAngle)
             {
                 EnableLockOnCamera();
             }
