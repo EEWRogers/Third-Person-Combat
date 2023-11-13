@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Vector3 playerVelocity;
     bool playerGrounded;
+    bool isDodging = false;
     Transform cameraTransform;
     Animator playerAnimator;
     PlayerHealth playerHealth;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     InputAction moveAction;
     InputAction jumpAction;
     InputAction attackAction;
+    InputAction dodgeAction;
 
     PlayerWeapon playerWeapon;
     Transform cameraTransformReference;
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
+        dodgeAction = playerInput.actions["Dodge"];
 
         controller = GetComponent<CharacterController>();
         playerHealth = GetComponent<PlayerHealth>();
@@ -45,21 +48,24 @@ public class PlayerController : MonoBehaviour
     void OnEnable() 
     {
         attackAction.performed += Attack;
-        
+        dodgeAction.performed += Dodge;
     }
 
     void OnDisable() 
     {
         attackAction.performed -= Attack;
-
+        dodgeAction.performed -= Dodge;
     }
 
     void Update()
     {
         CheckIfGrounded();
 
-        MovePlayer();
-
+        if (!isDodging)
+        {
+            MovePlayer();
+        }
+        
         JumpPlayer();
 
     }
@@ -106,6 +112,15 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetTrigger("attack");
     }
 
+    void Dodge(InputAction.CallbackContext context)
+    {
+        if (!isDodging)
+        {
+            isDodging = true;
+            Debug.Log("Dodging!");
+            isDodging = false;
+        }
+    }
     void EnableWeapon()
     {
         playerWeapon.weaponCollider.enabled = true;
