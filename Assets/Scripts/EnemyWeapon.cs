@@ -9,7 +9,6 @@ public class EnemyWeapon : MonoBehaviour
     public BoxCollider weaponCollider;
     PlayerHealth playerHealth;
     Rigidbody targetRigidbody;
-    Vector3 knockbackDirection;
 
     void Awake() 
     {

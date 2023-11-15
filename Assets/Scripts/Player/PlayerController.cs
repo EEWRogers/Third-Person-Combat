@@ -8,29 +8,36 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float playerSpeed = 2.0f;
-    [SerializeField] float jumpHeight = 1.0f;
-    [SerializeField] float dodgeStrength = 2.0f;
-    [SerializeField] float gravityValue = -9.81f;
     [SerializeField] float movementAccelerationDelay = 0.2f;
+    [SerializeField] float jumpHeight = 1.0f;
+    [SerializeField] float gravityValue = -9.81f;
+    [SerializeField] float dodgeStrength = 2.0f;
     [SerializeField] float dodgeLength = 1.0f;
+    [SerializeField] float attackTimeout = 1.0f;
     
     CharacterController controller;
+    Animator playerAnimator;
+    PlayerHealth playerHealth;
+    PlayerInput playerInput;
+    PlayerWeapon playerWeapon;
+
     Vector3 playerVelocity;
     Vector2 currentInputVector;
     Vector2 smoothInputVelocity;
     bool playerGrounded;
     bool isDodging = false;
+    
+    int currentAttack = 0;
+    int attackQueue = 0;
+
     Transform cameraTransform;
-    Animator playerAnimator;
-    PlayerHealth playerHealth;
-    PlayerInput playerInput;
+    Transform cameraTransformReference;
+
     InputAction moveAction;
     InputAction jumpAction;
     InputAction attackAction;
     InputAction dodgeAction;
 
-    PlayerWeapon playerWeapon;
-    Transform cameraTransformReference;
 
     void Awake() 
     {
@@ -119,7 +126,43 @@ public class PlayerController : MonoBehaviour
     {
         if (playerHealth.IsBlocking) { return; }
 
-        playerAnimator.SetTrigger("attack");
+        attackQueue++;
+
+        if (attackQueue > 3)
+        {
+            attackQueue = 3;
+        }
+
+        StartCoroutine(PerformAttack());
+
+    }
+
+    IEnumerator PerformAttack()
+    {
+        currentAttack = attackQueue;
+
+        SetAttackAnimation(currentAttack);
+
+        AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+        float animationLength = stateInfo.length;
+
+        yield return new WaitForSeconds(attackTimeout);
+
+        if (currentAttack == attackQueue)
+        {
+            SetAttackAnimation(0);
+            attackQueue = 0;
+        }
+
+        if (currentAttack < attackQueue)
+        {
+            StartCoroutine(PerformAttack());
+        }
+    }
+
+    void SetAttackAnimation(int attackNumber)
+    {
+        playerAnimator.SetInteger("attack", attackNumber);
     }
 
     void Dodge(InputAction.CallbackContext context)
@@ -141,6 +184,7 @@ public class PlayerController : MonoBehaviour
         isDodging = false;
         playerHealth.canBlock = true;
     }
+
     void EnableWeapon()
     {
         playerWeapon.weaponCollider.enabled = true;
@@ -150,4 +194,5 @@ public class PlayerController : MonoBehaviour
     {
         playerWeapon.weaponCollider.enabled = false;
     }
+
 }
