@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float attackTimeout = 1.0f;
     
     CharacterController controller;
-    Animator playerAnimator;
-    PlayerHealth playerHealth;
+    Animator animator;
+    PlayerHealth player;
     PlayerInput playerInput;
     PlayerWeapon playerWeapon;
 
@@ -48,8 +48,8 @@ public class PlayerController : MonoBehaviour
         dodgeAction = playerInput.actions["Dodge"];
 
         controller = GetComponent<CharacterController>();
-        playerHealth = GetComponent<PlayerHealth>();
-        playerAnimator = GetComponent<Animator>();
+        player = GetComponent<PlayerHealth>();
+        animator = GetComponent<Animator>();
 
         cameraTransform = Camera.main.transform;
         cameraTransformReference = new GameObject().transform; //creates a new game object to use as a reference
@@ -124,50 +124,35 @@ public class PlayerController : MonoBehaviour
 
     void Attack(InputAction.CallbackContext context)
     {
-        if (playerHealth.IsBlocking) { return; }
+        if (player.IsBlocking) { return; }
 
-        attackQueue++;
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (attackQueue > 3)
+        if (stateInfo.IsName("Idle"))
         {
-            attackQueue = 3;
+            TriggerAttack(1);
         }
 
-        StartCoroutine(PerformAttack());
+        if (stateInfo.IsName("Attack 1"))
+        {
+            TriggerAttack(2);
+        }
+
+        if (stateInfo.IsName("Attack 2"))
+        {
+            TriggerAttack(3);
+        }
 
     }
 
-    IEnumerator PerformAttack()
+    void TriggerAttack(int attackNumber)
     {
-        currentAttack = attackQueue;
-
-        SetAttackAnimation(currentAttack);
-
-        AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
-        float animationLength = stateInfo.length;
-
-        yield return new WaitForSeconds(attackTimeout);
-
-        if (currentAttack == attackQueue)
-        {
-            SetAttackAnimation(0);
-            attackQueue = 0;
-        }
-
-        if (currentAttack < attackQueue)
-        {
-            StartCoroutine(PerformAttack());
-        }
-    }
-
-    void SetAttackAnimation(int attackNumber)
-    {
-        playerAnimator.SetInteger("attack", attackNumber);
+        animator.SetTrigger("attack" + attackNumber);
     }
 
     void Dodge(InputAction.CallbackContext context)
     {
-        if (!isDodging && !playerHealth.IsBlocking)
+        if (!isDodging && !player.IsBlocking)
         {
             StartCoroutine(PerformDodge());
         }
@@ -176,13 +161,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator PerformDodge()
     {
         isDodging = true;
-        playerHealth.canBlock = false;
+        player.canBlock = false;
         Debug.Log("Dodging!");
 
         yield return new WaitForSeconds(dodgeLength);
 
         isDodging = false;
-        playerHealth.canBlock = true;
+        player.canBlock = true;
     }
 
     void EnableWeapon()
