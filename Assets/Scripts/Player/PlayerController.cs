@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
     void Attack(InputAction.CallbackContext context)
     {
-        if (player.IsBlocking) { return; }
+        if (player.IsBlocking || !controller.isGrounded) { return; }
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 

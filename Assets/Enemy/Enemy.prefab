@@ -367,8 +367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff47587629e43e43b1170f738f1576e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highHealthValue: 0.7
-  midHealthValue: 0.4
+  highHealthValue: 0.8
+  midHealthValue: 0.3
   highHealthColour: {r: 0.41960785, g: 0.8509804, b: 0.54509807, a: 1}
   midHealthColour: {r: 0.9245283, g: 0.8286886, b: 0.30962977, a: 1}
   lowHealthColour: {r: 0.7830189, g: 0.21406248, b: 0.1735938, a: 1}
