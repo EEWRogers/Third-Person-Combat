@@ -8,11 +8,8 @@ public class EnemyStateManager : MonoBehaviour
     [SerializeField] float chaseRange = 10f;
     [SerializeField] float turnSpeed = 50f;
     [SerializeField] float maxAttackAngle = 25f;
-    [SerializeField] float maxAttackRange = 3f;
 
     PlayerHealth player;
-    Vector3 directionOfPlayer;
-    float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
     bool isParriable = false;
 
@@ -70,7 +67,6 @@ public class EnemyStateManager : MonoBehaviour
             case EnemyState.Attack:
             BeParried();
             AttackPlayer();
-
             break;
 
             case EnemyState.Dodge:

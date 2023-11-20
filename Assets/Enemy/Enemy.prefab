@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5501825007836416492}
   - component: {fileID: 7473358990130315198}
   - component: {fileID: 8228249525593999066}
-  - component: {fileID: 7100234018195162968}
   m_Layer: 0
   m_Name: Eye
   m_TagString: Untagged
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7100234018195162968
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7915731762244184932}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8251687877500016730
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,10 +96,10 @@ GameObject:
   - component: {fileID: 1723271598521982093}
   - component: {fileID: 6310353416177232091}
   - component: {fileID: -5811053091197375268}
-  - component: {fileID: 1375420649222705032}
   - component: {fileID: 5788875554124157593}
   - component: {fileID: 2595705251391301574}
   - component: {fileID: 1323772679851131316}
+  - component: {fileID: 5860430207695742596}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -241,22 +219,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1375420649222705032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8251687877500016730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a0f50da5010544e929dbb3a3d92506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  chaseRange: 10
-  turnSpeed: 50
-  maxAttackAngle: 25
 --- !u!114 &5788875554124157593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +280,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5860430207695742596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251687877500016730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1286ea4d7f3b8b14298407a322619fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseRange: 10
+  turnSpeed: 50
+  maxAttackAngle: 25
+  maxAttackRange: 3
+  currentState: 0
 --- !u!1001 &2280898943251323073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -368,6 +347,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4628498158465813126, guid: c63b32cebc2081e4f9a64a8960a0181b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979866373551837530, guid: c63b32cebc2081e4f9a64a8960a0181b, type: 3}
+      propertyPath: weaponDamage
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
