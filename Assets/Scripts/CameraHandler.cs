@@ -99,14 +99,14 @@ public class CameraHandler : MonoBehaviour
     {
         if (lockOnCamera.LookAt == null)
         {
-            if (closestEnemyByAngle == null)
+            if (closestEnemyByAngle == null || closestAngleToCamera > maximumLockOnAngle)
             {
                 EnableFollowCamera();
             }
             
             else
             {
-                if (lockedOn)
+                if (lockedOn && closestAngleToCamera <= maximumLockOnAngle)
                 {
                     EnableLockOnCamera();
                 }

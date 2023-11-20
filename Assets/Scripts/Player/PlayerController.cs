@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravityValue = -9.81f;
     [SerializeField] float dodgeStrength = 2.0f;
     [SerializeField] float dodgeLength = 1.0f;
-    [SerializeField] float attackTimeout = 1.0f;
     
     CharacterController controller;
     Animator animator;
@@ -26,9 +25,6 @@ public class PlayerController : MonoBehaviour
     Vector2 smoothInputVelocity;
     bool playerGrounded;
     bool isDodging = false;
-    
-    int currentAttack = 0;
-    int attackQueue = 0;
 
     Transform cameraTransform;
     Transform cameraTransformReference;

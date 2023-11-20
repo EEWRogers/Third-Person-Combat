@@ -234,8 +234,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
+  movementAccelerationDelay: 0.2
   jumpHeight: 1
   gravityValue: -9.81
+  dodgeStrength: 7
+  dodgeLength: 0.35
 --- !u!143 &839830243101764120
 CharacterController:
   m_ObjectHideFlags: 0
@@ -311,6 +314,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e717b101-6452-49c7-a19c-de89ce70c2b2
     m_ActionName: Player/Target Lock[/Mouse/middleButton,/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 99f723dd-cac7-4dca-9ac6-e48589e9141a
+    m_ActionName: Player/Dodge[/Keyboard/ctrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -351,7 +358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   blockDamageReductionPercent: 50
-  invulnerabilityTime: 1
+  invulnerabilityTime: 0.5
+  canBlock: 1
 --- !u!54 &5552980037540659380
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -518,7 +526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4628498158465813126, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.41600582
+      value: -0.4160058
       objectReference: {fileID: 0}
     - target: {fileID: 4628498158465813126, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -530,15 +538,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4628498158465813126, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -49.53
+      value: -32.035
       objectReference: {fileID: 0}
     - target: {fileID: 4628498158465813126, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 13.473
+      value: -58.071
       objectReference: {fileID: 0}
     - target: {fileID: 4628498158465813126, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099693002489949138, guid: 787fa183c6c9de240aae8cad369f096c, type: 3}
+      propertyPath: weaponDamage
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
