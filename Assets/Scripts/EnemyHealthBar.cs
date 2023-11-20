@@ -15,7 +15,7 @@ public class EnemyHealthBar : MonoBehaviour
 
     void Update() 
     {
-        gameObject.transform.rotation = mainCamera.transform.rotation;
+        transform.parent.rotation = mainCamera.transform.rotation;
     }
 
     public void UpdateHealthBar(float currentHealth, float maxHealth)
