@@ -60,21 +60,16 @@ public class EnemyStateManager : MonoBehaviour
             break;
 
             case EnemyState.Chase:
+            StopAttackingPlayer();
             ChasePlayer();
             break;
 
             case EnemyState.Ready:
-            SetState(EnemyState.Attack);
             break;
 
             case EnemyState.Attack:
-
-            float angle = Vector3.Angle(transform.forward, DirectionOfPlayer());
-
-            if (angle < maxAttackAngle)
-            {
-                AttackPlayer();
-            }
+            BeParried();
+            AttackPlayer();
 
             break;
 
@@ -120,16 +115,22 @@ public class EnemyStateManager : MonoBehaviour
 
     void AttackPlayer()
     {
-        BeParried();
+        float angle = Vector3.Angle(transform.forward, DirectionOfPlayer());
 
-        if (DistanceToPlayer() > maxAttackRange)
-        {
-            animator.SetTrigger("stopAttack");
-        }
-        else
+        if (angle < maxAttackAngle)
         {
             animator.SetTrigger("attack");
         }
+
+        else
+        {
+            StopAttackingPlayer();
+        }
+    }
+
+    void StopAttackingPlayer()
+    {
+        animator.SetTrigger("stopAttack");
     }
 
     void BeParried()
