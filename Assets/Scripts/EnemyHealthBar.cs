@@ -7,17 +7,21 @@ public class EnemyHealthBar : MonoBehaviour
 {
     [SerializeField] float highHealthValue = 0.7f;
     [SerializeField] float midHealthValue = 0.4f;
-    [SerializeField] Color highHealthColour = new Color();
-    [SerializeField] Color midHealthColour = new Color();
-    [SerializeField] Color lowHealthColour = new Color();
+    [SerializeField] Color highHealthColour;
+    [SerializeField] Color midHealthColour;
+    [SerializeField] Color lowHealthColour;
 
     Slider slider;
     Camera mainCamera;
+    Image healthBar;
 
     void Awake() 
     {
         mainCamera = FindObjectOfType<Camera>();
         slider = GetComponent<Slider>();
+        healthBar = transform.GetChild (1).GetChild (0).gameObject.GetComponent<Image>();
+
+        UpdateHealthBarColour();
     }
 
     void Update() 
@@ -30,6 +34,23 @@ public class EnemyHealthBar : MonoBehaviour
     {
         if (slider == null) { return; }
         slider.value = currentHealth / maxHealth;
+        UpdateHealthBarColour();
+    }
+
+    void UpdateHealthBarColour()
+    {
+        if (slider.value >= highHealthValue)
+        {
+            healthBar.color = highHealthColour;
+        }
+        else if (slider.value < highHealthValue && slider.value > midHealthValue)
+        {
+            healthBar.color = midHealthColour;
+        }
+        else if (slider.value < midHealthValue)
+        {
+            healthBar.color = lowHealthColour;
+        }
 
     }
 

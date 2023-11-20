@@ -369,9 +369,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highHealthValue: 0.7
   midHealthValue: 0.4
-  highHealthColour: {r: 0.41960785, g: 0.8509804, b: 0.54509807, a: 0}
-  midHealthColour: {r: 0.9245283, g: 0.8286886, b: 0.30962977, a: 0}
-  lowHealthColour: {r: 0.7830189, g: 0.21406248, b: 0.1735938, a: 0}
+  highHealthColour: {r: 0.41960785, g: 0.8509804, b: 0.54509807, a: 1}
+  midHealthColour: {r: 0.9245283, g: 0.8286886, b: 0.30962977, a: 1}
+  lowHealthColour: {r: 0.7830189, g: 0.21406248, b: 0.1735938, a: 1}
 --- !u!1 &7386978989365210440
 GameObject:
   m_ObjectHideFlags: 0

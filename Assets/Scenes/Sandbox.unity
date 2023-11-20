@@ -256,7 +256,7 @@ Transform:
   m_GameObject: {fileID: 234080101}
   serializedVersion: 2
   m_LocalRotation: {x: -0.4331887, y: 0.00033871128, z: -0.00016279309, w: 0.9013032}
-  m_LocalPosition: {x: -1.5, y: 0.00000005901326, z: 0.00000007163154}
+  m_LocalPosition: {x: -1.5, y: 0.000000010193546, z: -0.00000001624393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263737424}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25084135, y: 0.000000016207366, z: -0.000000004199751, w: 0.96802825}
+  m_LocalRotation: {x: 0.25084135, y: -0.000000016225151, z: 0.000000004204359, w: 0.96802825}
   m_LocalPosition: {x: 1.5, y: 3.5, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1473,7 +1473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173308711}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.00033869944, z: 0.00016278679, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.0003386965, z: 0.00016278661, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1692,7 +1692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214673191}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.0003386645, z: 0.00016278471, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.00033873142, z: 0.00016278868, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1937,7 +1937,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436431686}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331887, y: -0.0003386702, z: 0.00016278506, w: 0.9013032}
+  m_LocalRotation: {x: 0.4331887, y: -0.00033872575, z: 0.00016278833, w: 0.9013032}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2751,16 +2751,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1261253031632130203, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}
-      propertyPath: highHealthColour.b
-      value: 0.54509807
+      propertyPath: midHealthValue
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1261253031632130203, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}
-      propertyPath: highHealthColour.g
-      value: 0.8509804
-      objectReference: {fileID: 0}
-    - target: {fileID: 1261253031632130203, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}
-      propertyPath: highHealthColour.r
-      value: 0.41960785
+      propertyPath: highHealthValue
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2544868858779448679, guid: 925334516b38f0d4a96fa8bd81f71664, type: 3}
       propertyPath: m_LocalPosition.x
