@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2555586813537100909}
   - component: {fileID: 1534171796840946652}
   - component: {fileID: 8533125601447984234}
+  - component: {fileID: 2768906924099810172}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -57,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: dc3689bb0b993c248996599509dd1e01, type: 2}
   m_Color: {r: 0.41960782, g: 0.8509804, b: 0.5439195, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -75,6 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2768906924099810172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433713832894183563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f42000897bb3749ab2153a38955583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1091471687574745527
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,8 +367,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff47587629e43e43b1170f738f1576e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  mainCamera: {fileID: 0}
+  highHealthValue: 0.7
+  midHealthValue: 0.4
+  highHealthColour: {r: 0.41960785, g: 0.8509804, b: 0.54509807, a: 0}
+  midHealthColour: {r: 0.9245283, g: 0.8286886, b: 0.30962977, a: 0}
+  lowHealthColour: {r: 0.7830189, g: 0.21406248, b: 0.1735938, a: 0}
 --- !u!1 &7386978989365210440
 GameObject:
   m_ObjectHideFlags: 0
