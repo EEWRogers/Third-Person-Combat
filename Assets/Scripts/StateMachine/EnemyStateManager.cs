@@ -101,6 +101,14 @@ public class EnemyStateManager : MonoBehaviour
         navMeshAgent.SetDestination(player.transform.position);
     }
 
+    void StayAtSafeDistance()
+    {
+        if (DistanceToPlayer() < navMeshAgent.stoppingDistance)
+        {
+            
+        }
+    }
+
     void FacePlayer()
     {
         Vector3 direction = (player.transform.position - transform.position);
