@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput), typeof(PlayerHealth))]
 public class PlayerController : MonoBehaviour
 {
+    [Header ("Movement Tuning")]
     [SerializeField] float playerSpeed = 2.0f;
     [SerializeField] float movementAccelerationDelay = 0.2f;
     [SerializeField] float jumpHeight = 1.0f;

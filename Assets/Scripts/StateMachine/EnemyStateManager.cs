@@ -12,6 +12,7 @@ public class EnemyStateManager : MonoBehaviour
     PlayerHealth player;
     bool isProvoked = false;
     bool isParriable = false;
+    [SerializeField] ParticleSystem parryParticles;
 
     NavMeshAgent navMeshAgent;
     PlayerHealth playerHealth;
@@ -143,6 +144,7 @@ public class EnemyStateManager : MonoBehaviour
         {
             animator.SetTrigger("parried");
             Debug.Log("Attack parried!");
+            parryParticles.Play();
             player.GainParryInvulnerability();
 
             DisableParryWindow();
